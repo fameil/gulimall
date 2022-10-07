@@ -29,9 +29,212 @@ public class mesMain8081Test {
     @Autowired
     ProductionDataService productionDataService;
 
-    @Test
-    public void contextLoads() throws IOException {
+    //@Test
+    public void tiger7000() throws IOException {
+        String filePath = "C:/Users/oWo/Desktop/7000.txt";
 
+        String filePathw = "C:/Users/oWo/Desktop/7000_out_p.txt";
+
+        FileInputStream fin = new FileInputStream(filePath);
+        InputStreamReader reader = new InputStreamReader(fin);
+        BufferedReader buffReader = new BufferedReader(reader);
+
+        FileWriter fw = new FileWriter(filePathw, true);
+
+        List<String> ci = new ArrayList<>();
+        List<String> ci1 = new ArrayList<>();
+        List<String> ci2 = new ArrayList<>();
+        List<String> ci3 = new ArrayList<>();
+        List<String> cie = new ArrayList<>();
+        String sci = "";
+        //单字排首位
+        int max = 20000000;
+        while((sci = buffReader.readLine())!=null){
+            //ci.add(sci);
+            //ci1.add(sci.split("\t")[0]);
+            //ci2.add(sci.split("\t")[1]);
+           //ci3.add(sci.split("\t")[2]);
+
+            max--;
+            fw.write(sci.replaceAll("[0-9]+", max+"")+"\r\n");
+        }
+        System.out.println("加载词库完成============================================");
+
+
+
+
+/*      //选出四码字
+        for (int i = 0; i < ci3.size(); i++) {
+            if(ci3.get(i).length()==4){
+                fw.write(ci.get(i)+"\r\n");
+            }
+        }
+*/
+
+
+/*
+        char a1 = 'a';
+        char a2 = 'a';
+        char a3 = 'a';
+        char a4 = 'a';
+*/
+/*        for (int i = 0; i < 26; i++) {
+            cie.add(a1+"");
+            a1++;
+        }*/
+/*
+
+        a1 = 'a';
+        for (int i = 0; i < 26; i++) {
+            a2 = 'a';
+            for (int j = 0; j < 26; j++) {
+                cie.add(a1+""+a2);
+                a2++;
+            }
+            a1++;
+        }
+        a1 = 'a';
+        for (int i = 0; i < 26; i++) {
+            a2 = 'a';
+            for (int j = 0; j < 26; j++) {
+                a3 = 'a';
+                for (int l = 0; l <26 ; l++) {
+                    cie.add(a1+""+a2+a3);
+                    a3++;
+                }
+                a2++;
+            }
+            a1++;
+        }
+        a1 = 'a';
+
+*/
+/*        for (int i = 0; i < 26; i++) {
+            a2 = 'a';
+            for (int j = 0; j < 26; j++) {
+                a3 = 'a';
+                for (int l = 0; l <26 ; l++) {
+                    a4 = 'a';
+                    for (int m = 0; m < 26; m++) {
+                        cie.add(a1+""+a2+a3+a4);
+                        a4++;
+                    }
+                    a3++;
+                }
+                a2++;
+            }
+            a1++;
+        }*/
+/*
+
+        System.out.println("加载编码完成============================================");
+
+        String len = "";
+        for (int i = 0; i < cie.size(); i++) {
+            int a = 0;
+            for (int j = 0; j < ci3.size(); j++) {
+                len = "^"+cie.get(i)+".*";
+                if(ci3.get(j).matches(len)){
+                    fw.write(ci.get(j).replaceAll("[a-z]+", cie.get(i))+"\r\n");
+                    a++;
+                }
+                if (a == 6){
+                    break;
+                }
+            }
+            if (i%100==0){
+                System.out.println(cie.size()-i);
+            }
+        }
+*/
+
+
+
+
+
+        fw.close();
+
+
+        buffReader.close();
+
+
+
+    }
+
+    @Test
+    public void tiger() throws IOException {
+        String filePath = "C:/Users/oWo/Desktop/dan.txt";
+
+        String filePathw = "C:/Users/oWo/Desktop/dan_out.txt";
+
+        FileInputStream fin = new FileInputStream(filePath);
+        InputStreamReader reader = new InputStreamReader(fin);
+        BufferedReader buffReader = new BufferedReader(reader);
+
+        FileWriter fw = new FileWriter(filePathw, true);
+
+        List<String> ci = new ArrayList<>();
+        List<String> ci1 = new ArrayList<>();
+        List<String> ci2 = new ArrayList<>();
+        List<String> ci3 = new ArrayList<>();
+        List<Integer> ciOut = new ArrayList<>();
+        String sci = "";
+
+        while((sci = buffReader.readLine())!=null){
+            ci.add(sci);
+            ci1.add(sci.split("\t")[0]);
+            ci2.add(sci.split("\t")[1]);
+            ci3.add(sci.split("\t")[2]);
+        }
+        for (int i = 0; i < ci.size(); i++) {
+            for (int j = i+1; j < ci.size(); j++) {
+                if (ci1.get(i).equals(ci1.get(j))){
+                    if (ci3.get(i).length()<=ci3.get(j).length()){
+                        ci.remove(j);
+                        ci1.remove(j);
+                        ci3.remove(j);
+                        j--;
+                    }else {
+                        ci.remove(j);
+                        ci1.remove(j);
+                        ci3.remove(j);
+                        j--;
+                    }
+                }
+            }
+
+            if (i%100==0){
+                System.out.println(ci.size()-i);
+            }
+        }
+
+        for (String s : ci) {
+            fw.write(s+"\r\n");
+        }
+
+
+        System.out.println("加载词库完成============================================");
+
+        fw.close();
+
+
+        buffReader.close();
+
+
+
+
+
+    }
+
+
+    @Test
+    public void contextLoadabc() throws IOException {
+        System.out.println("abc");
+    }
+
+    @Test
+    public void contextLoadsJSON() throws IOException {
+/*
         String filePath = "C:/Users/oWo/Desktop/2.jpg";
 
         String filePathw = "C:/Users/oWo/Desktop/3.jpg";
@@ -57,10 +260,8 @@ public class mesMain8081Test {
 
         bos.write(encode);
         
-        
 
-
-/*        String sci;
+        String sci;
         while((sci = buffReader.readLine())!=null){
             //将字符串转成数组
             byte[] bytes = sci.getBytes(StandardCharsets.UTF_8);
@@ -69,11 +270,12 @@ public class mesMain8081Test {
             //写入文件
             bos.write(decode);
 
-        }*/
+        }
+
 
 
         buffReader.close();
-        bos.close();
+        bos.close();*/
     }
 
 
@@ -81,7 +283,7 @@ public class mesMain8081Test {
     @Test
     public void contextLoads2() throws IOException {
 
-        String filePath = "C:/Users/oWo/Desktop/1。";
+      /*  String filePath = "C:/Users/oWo/Desktop/abcd.txt";
 
         String filePathw = "C:/Users/oWo/Desktop/abcdff.txt";
 
@@ -113,22 +315,27 @@ public class mesMain8081Test {
 
         String regex = "[\t]";
 
-
         List<String> ci = new ArrayList<>();
-        List<String> ci3 = new ArrayList<>();
+        List<String> ci1 = new ArrayList<>();
         List<String> ci2 = new ArrayList<>();
-        List<String> cie = new ArrayList<>();
+        List<String> ci3 = new ArrayList<>();
+        List<String> ciOut = new ArrayList<>();
         String sci = "";
-        int length;
+
         int max=199999;
         while((sci = buffReader.readLine())!=null){
-            length = sci.split("\t")[0].length();
+            ci.add(sci);
+            ci1.add(sci.split("\t")[0]);
+            ci2.add(sci.split("\t")[1]);
+            ci3.add(sci.split("\t")[2]);
+*//*            length = sci.split("\t")[0].length();
             if (length == 1){
                 //bw.write(sci+"\r\n");
                 if (sci.split("\t")[2].length()<4){
-   /*                 ci.add(sci);
+                 ci.add(sci);
                     ci2.add(sci.split("\t")[1]);
-                    ci3.add(sci.split("\t")[2]);*/
+                    ci3.add(sci.split("\t")[2]);
+
                     max--;
                     bw.write(sci.replaceAll("[0-9]+", max+"")+"\r\n");
                 }
@@ -138,9 +345,38 @@ public class mesMain8081Test {
                // if (sci.split("\t")[2].length()==4){
                     //bw.write(sci+"\r\n");
               //  }
+            }*//*
+        }
+
+        int size = ci.size();
+        String mix = "";
+        int length;
+        for (int i = 0; i < size; i++) {
+            mix = ci.get(i);
+            length = ci3.get(i).length();
+            for (int i1 = (i+1); i1 < size; i1++) {
+                if (ci1.get(i).equals(ci1.get(i1))){
+                    if (length > ci3.get(i1).length()){
+                        mix = ci.get(i1);
+                        length = ci3.get(i1).length();
+                    }
+                }
+            }
+            ciOut.add(mix);
+            if (i%10==0){
+                System.out.println(size-i);
             }
         }
+
+        for (String s : ciOut) {
+            bw.write(s+"\r\n");
+        }
+
+
+
+
         System.out.println("加载词库完成============================================");
+*//*
         char a1 = 'a';
         char a2 = 'a';
         char a3 = 'a';
@@ -175,7 +411,6 @@ public class mesMain8081Test {
         a1 = 'a';
 
 
-     /*
         for (int i = 0; i < 26; i++) {
             a2 = 'a';
             for (int j = 0; j < 26; j++) {
@@ -193,11 +428,11 @@ public class mesMain8081Test {
             a1++;
         }
 
-        */
+
+
         System.out.println("加载编码完成============================================");
 
 
-/*
         for (int i = 0; i < cie.size(); i++) {
             int a = 0;
             for (int j = 0; j < ci3.size(); j++) {
@@ -217,12 +452,15 @@ public class mesMain8081Test {
                 System.out.println(cie.size()-i);
             }
         }
-*/
+*//*
 
 
 
 
-/*        String[] split;
+*//*
+
+
+        String[] split;
         String[] split2;
         for (int i = 0; i < ci.size(); i++) {
             //str = ci.get(i).replaceAll("\\s*", "").replaceAll("[^(A-Za-z)]", "");
@@ -249,7 +487,9 @@ public class mesMain8081Test {
             }
             k++;
 
-        }*/
+        }
+
+*//*
 
 
 
@@ -260,7 +500,7 @@ public class mesMain8081Test {
         buffReader.close();
 
 
-
+*/
     }
 
 

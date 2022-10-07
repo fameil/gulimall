@@ -5,7 +5,7 @@ server:
     max-threads: 1000
     min-spare-threads: 30
   port: 8080
-  connection-timeout: 5000ms
+  #connection-timeout: 5000ms
   servlet:
     context-path: /renren-fast
 
@@ -41,6 +41,12 @@ spring:
       matching-strategy: ANT_PATH_MATCHER
 #  resources:
 #    add-mappings: false
+  application:
+    name: renren-fast
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 114.115.246.166:8848
 
 
 #mybatis
@@ -76,3 +82,4 @@ renren:
     # token有效时长，7天，单位秒
     expire: 604800
     header: token
+

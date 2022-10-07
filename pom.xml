@@ -11,15 +11,16 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>gulimall-product</module>
         <module>renren-fast</module>
         <module>mes-storage</module>
         <module>renren-generator</module>
         <module>gulimall-common</module>
-        <module>gulimall-coupon</module>
-        <module>guilmall-order</module>
+        <module>gulimall-order</module>
         <module>gulimall-ware</module>
         <module>gulimall-coupon</module>
+        <module>gulimall-product</module>
+        <module>gulimall-member</module>
+        <module>gulimall-gateway</module>
 
     </modules>
 
