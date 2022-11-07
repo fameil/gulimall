@@ -1,10 +1,16 @@
 package com.srz.gulimall.product.controller;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 
 //import org.apache.shiro.authz.annotation.RequiresPermissions;
+import com.srz.common.valid.AddGroup;
+import com.srz.common.valid.UpdataeStatusGroup;
+import com.srz.common.valid.UpdateGroup;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +22,7 @@ import com.srz.gulimall.product.service.PmsBrandService;
 import com.srz.common.utils.PageUtils;
 import com.srz.common.utils.R;
 
+import javax.validation.Valid;
 
 
 /**
@@ -59,9 +66,26 @@ public class PmsBrandController {
      */
     @RequestMapping("/save")
     //@RequiresPermissions("product:pmsbrand:save")
-    public R save(@RequestBody PmsBrandEntity pmsBrand){
-		pmsBrandService.save(pmsBrand);
+    public R save(@Validated({AddGroup.class}) @RequestBody PmsBrandEntity pmsBrand/*, BindingResult result*/){
+//        //BindingResult result返回错误消息
+//        if (result.hasErrors()) {
+//            Map<String,String> map = new HashMap<>();
+//            //获取数据的校验结果
+//            result.getFieldErrors().forEach((item)->{
+//
+//                // FieldErrors可以获取错误信息
+//                String message = item.getDefaultMessage();
+//                // 获取错误属性的名字
+//                String field = item.getField();
+//                map.put(field,message);
+//            });
+//
+//            return R.error(400,"提交的数据不合法").put("data",map);
+//        } else {
+//            pmsBrandService.save(pmsBrand);
+//        }
 
+        pmsBrandService.save(pmsBrand);
         return R.ok();
     }
 
@@ -70,11 +94,23 @@ public class PmsBrandController {
      */
     @RequestMapping("/update")
     //@RequiresPermissions("product:pmsbrand:update")
-    public R update(@RequestBody PmsBrandEntity pmsBrand){
+    public R update(@Validated({UpdateGroup.class}) @RequestBody PmsBrandEntity pmsBrand){
 		pmsBrandService.updateById(pmsBrand);
 
         return R.ok();
     }
+
+    /**
+     * 修改状态
+     */
+    @RequestMapping("/update/status")
+    //@RequiresPermissions("product:pmsbrand:update")
+    public R updateStatus(@Validated({UpdataeStatusGroup.class}) @RequestBody PmsBrandEntity pmsBrand){
+        pmsBrandService.updateById(pmsBrand);
+
+        return R.ok();
+    }
+
 
     /**
      * 删除

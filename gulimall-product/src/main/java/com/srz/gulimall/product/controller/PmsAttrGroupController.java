@@ -34,10 +34,12 @@ public class PmsAttrGroupController {
     /**
      * 列表
      */
-    @RequestMapping("/list")
+    @RequestMapping("/list/{catelogId}")
     //@RequiresPermissions("product:pmsattrgroup:list")
-    public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = pmsAttrGroupService.queryPage(params);
+    public R list(@RequestParam Map<String, Object> params,
+                  @PathVariable("catelogId") Long catelogId){
+        //PageUtils page = pmsAttrGroupService.queryPage(params);
+        PageUtils page = pmsAttrGroupService.queryPage(params,catelogId);
 
         return R.ok().put("page", page);
     }

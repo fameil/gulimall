@@ -20,3 +20,24 @@ spring:
           predicates:
             - Query=url,qq
             #http://localhost:88/?url=qq
+        - id: product_route
+          uri: lb://gulimall-product
+          predicates:
+            - Path=/api/product/**
+          filters:
+            - RewritePath=/api/(?<segment>.*),//$\{segment}
+          #http://localhost:88/api/renren-fast/product/pmscategory/list/tree ==> http://localhost:10000/product/pmscategory/list/tree
+        - id: third_party_route
+          uri: lb://gulimall-third-party
+          predicates:
+            - Path=/api/thirdparty/**
+          filters:
+            - RewritePath=/api/thirdparty/(?<segment>.*),/$\{segment}
+        - id: admin_route
+          uri: lb://renren-fast
+          predicates:
+            - Path=/api/**
+          filters:
+            - RewritePath=/api/(?<segment>.*),/renren-fast/$\{segment}
+          #/api
+          #http://localhost:8080/api/captcha.jpg ==> http://localhost:8080/renren-fast/captcha.jpg

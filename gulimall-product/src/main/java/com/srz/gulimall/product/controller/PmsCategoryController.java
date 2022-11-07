@@ -46,7 +46,7 @@ public class PmsCategoryController {
     }
 
 
-    /**
+    /** 
      * 信息
      */
     @RequestMapping("/info/{catId}")
@@ -54,7 +54,7 @@ public class PmsCategoryController {
     public R info(@PathVariable("catId") Long catId){
 		PmsCategoryEntity pmsCategory = pmsCategoryService.getById(catId);
 
-        return R.ok().put("pmsCategory", pmsCategory);
+        return R.ok().put("data", pmsCategory);
     }
 
     /**
@@ -68,6 +68,15 @@ public class PmsCategoryController {
         return R.ok();
     }
 
+    /**
+     *
+     */
+    @RequestMapping("/update/sort")
+    //@RequiresPermissions("product:pmscategory:update")
+    public R updateSort(@RequestBody PmsCategoryEntity[] pmsCategory){
+        pmsCategoryService.updateBatchById(Arrays.asList(pmsCategory));
+        return R.ok();
+    }
     /**
      * 修改
      */
@@ -85,7 +94,9 @@ public class PmsCategoryController {
     @RequestMapping("/delete")
     //@RequiresPermissions("product:pmscategory:delete")
     public R delete(@RequestBody Long[] catIds){
-		pmsCategoryService.removeByIds(Arrays.asList(catIds));
+
+        //1、检查当前删除的菜单，是否被别的地方引用
+		pmsCategoryService.removeMenuByIds(Arrays.asList(catIds));
 
         return R.ok();
     }

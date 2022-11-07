@@ -1,0 +1,19 @@
+spring:
+  cloud:
+    nacos:
+      config:
+        server-addr: 114.115.246.166:8848   #Nacos作为配置中心地址
+        file-extension: yaml  #指定格式
+        group: DEFAULT_GROUP
+        namespace: 39af079a-4b6a-4c2c-903c-cc60de1e0ef8
+        refresh-enabled: true
+        shared-configs:
+          - data-id: oss.yaml
+            group: DEFAULT_GROUP
+            refresh: true
+#          - data-id: mybatis.yaml
+#            group: dev
+#            refresh: true
+#          - data-id: other.yaml
+#            group: dev
+#            refresh: true
