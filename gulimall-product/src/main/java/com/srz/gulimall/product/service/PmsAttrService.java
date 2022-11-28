@@ -3,7 +3,11 @@ package com.srz.gulimall.product.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.srz.common.utils.PageUtils;
 import com.srz.gulimall.product.entity.PmsAttrEntity;
+import com.srz.gulimall.product.vo.AttrGroupReleationVo;
+import com.srz.gulimall.product.vo.AttrRespVo;
+import com.srz.gulimall.product.vo.AttrVo;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,5 +20,19 @@ import java.util.Map;
 public interface PmsAttrService extends IService<PmsAttrEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
+
+    void saveAttr(AttrVo attrVo);
+
+    PageUtils queryBaseAttrPage(Map<String, Object> params, Long catelogId, String attrType);
+
+    AttrRespVo getAttrInfo(Long attrId);
+
+    void updateAttr(AttrVo attrVo);
+
+    List<PmsAttrEntity> getRelationAttr(Long attrgroupId);
+
+    void deleteRelation(AttrGroupReleationVo[] vos);
+
+    PageUtils getNoRelationAttr(Map<String, Object> params, Long attrgroupId);
 }
 

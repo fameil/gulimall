@@ -1,8 +1,11 @@
 package com.srz.gulimall.product.service.impl;
 
+import com.srz.gulimall.product.service.PmsCategoryBrandRelationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -16,6 +19,7 @@ import com.srz.common.utils.Query;
 import com.srz.gulimall.product.dao.PmsCategoryDao;
 import com.srz.gulimall.product.entity.PmsCategoryEntity;
 import com.srz.gulimall.product.service.PmsCategoryService;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Service("pmsCategoryService")
@@ -23,6 +27,9 @@ public class PmsCategoryServiceImpl extends ServiceImpl<PmsCategoryDao, PmsCateg
 
 //    @Autowired
 //    PmsCategoryDao categoryDao;
+
+    @Autowired
+    PmsCategoryBrandRelationService pmsCategoryBrandRelationService;
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
@@ -56,6 +63,41 @@ public class PmsCategoryServiceImpl extends ServiceImpl<PmsCategoryDao, PmsCateg
         //TODO 1、检查当前删除的菜单，是否被别的地方引用
         //逻辑删除
         baseMapper.deleteBatchIds(asList);
+    }
+
+    //2,25,225
+    @Override
+    public Long[] findCatelogPath(Long attrGroupId1) {
+        List<Long> paths = new ArrayList<>();
+        findParentPath(attrGroupId1,paths);
+
+        Collections.reverse(paths);
+
+        return (Long[]) paths.toArray(new Long[paths.size()]);
+    }
+
+    /**
+     * 级联更新所有关联的数据
+     * @param pmsCategory
+     */
+    @Transactional
+    @Override
+    public void updateCascade(PmsCategoryEntity pmsCategory) {
+        this.updateById(pmsCategory);
+        pmsCategoryBrandRelationService.updateCategory(pmsCategory.getCatId(),pmsCategory.getName());
+
+    }
+
+    //225,25,2
+    private List<Long> findParentPath(Long attrGroupId1,List<Long> paths){
+        //1、 收集当前节点id
+        paths.add(attrGroupId1);
+        PmsCategoryEntity byId = this.getById(attrGroupId1);
+        if(byId.getParentCid()!=0){
+            findParentPath(byId.getParentCid(),paths);
+        }
+
+        return paths;
     }
 
     //递归查找所有的子菜单

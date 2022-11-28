@@ -12,7 +12,9 @@ import com.qiniu.storage.model.DefaultPutRet;
 import com.qiniu.util.Auth;
 import com.srz.gulimall.product.entity.PmsBrandEntity;
 import com.srz.gulimall.product.service.PmsBrandService;
+import com.srz.gulimall.product.service.PmsCategoryService;
 import com.srz.gulimall.product.utils.Qiniu;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,13 +23,14 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 /**
  * @author srz
  * @create 2022/9/8 16:23
  */
-
+@Slf4j
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class productTest8082 {
@@ -36,6 +39,18 @@ public class productTest8082 {
 
     @Autowired
     PmsBrandService brandService;
+
+    @Autowired
+    PmsCategoryService categoryService;
+
+    @Test
+    public void testFindPath(){
+        Long[] catelogPath = categoryService.findCatelogPath(225l);
+        log.info("完整路径:{}", Arrays.asList(catelogPath));
+
+
+    }
+
     @Test
     public void TestFile2() throws IOException {
         qiniu.qiniuOss("C:\\Users\\oWo\\Desktop\\练习\\001-2022-9-27.png"

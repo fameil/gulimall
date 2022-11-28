@@ -21,5 +21,16 @@ public interface PmsCategoryService extends IService<PmsCategoryEntity> {
     List<PmsCategoryEntity> listWithTree();
 
     void removeMenuByIds(List<Long> asList);
+
+    /**
+     * 找到catelogId完整路径
+     * [父/子/孙]
+     * @param attrGroupId1
+     * @return
+     */
+    Long[] findCatelogPath(Long attrGroupId1);
+
+    void updateCascade(PmsCategoryEntity pmsCategory);
+
 }
 

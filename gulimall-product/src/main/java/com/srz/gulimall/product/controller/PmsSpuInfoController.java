@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Map;
 
 //import org.apache.shiro.authz.annotation.RequiresPermissions;
+import com.srz.gulimall.product.vo.SpuSaveVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -59,8 +60,9 @@ public class PmsSpuInfoController {
      */
     @RequestMapping("/save")
     //@RequiresPermissions("product:pmsspuinfo:save")
-    public R save(@RequestBody PmsSpuInfoEntity pmsSpuInfo){
-		pmsSpuInfoService.save(pmsSpuInfo);
+    public R save(@RequestBody SpuSaveVo saveVo){
+		//pmsSpuInfoService.save(pmsSpuInfo);
+        pmsSpuInfoService.saveSpuInfo(saveVo);
 
         return R.ok();
     }

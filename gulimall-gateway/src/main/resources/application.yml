@@ -15,11 +15,13 @@ spring:
           predicates:
             - Query=url,baidu
             #http://localhost:88/?url=baidu
+
         - id: test_route2
           uri: https://www.qq.com
           predicates:
             - Query=url,qq
             #http://localhost:88/?url=qq
+
         - id: product_route
           uri: lb://gulimall-product
           predicates:
@@ -27,12 +29,21 @@ spring:
           filters:
             - RewritePath=/api/(?<segment>.*),//$\{segment}
           #http://localhost:88/api/renren-fast/product/pmscategory/list/tree ==> http://localhost:10000/product/pmscategory/list/tree
+
         - id: third_party_route
           uri: lb://gulimall-third-party
           predicates:
             - Path=/api/thirdparty/**
           filters:
             - RewritePath=/api/thirdparty/(?<segment>.*),/$\{segment}
+
+        - id: member_route
+          uri: lb://gulimall-member
+          predicates:
+            - Path=/api/member/**
+          filters:
+            - RewritePath=/api/(?<segment>.*),/$\{segment}
+
         - id: admin_route
           uri: lb://renren-fast
           predicates:

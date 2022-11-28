@@ -2,6 +2,7 @@ package com.srz.gulimall.product.dao;
 
 import com.srz.gulimall.product.entity.PmsSkuInfoEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.srz.gulimall.product.entity.PmsSpuInfoEntity;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -13,5 +14,6 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface PmsSkuInfoDao extends BaseMapper<PmsSkuInfoEntity> {
-	
+
+
 }

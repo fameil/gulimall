@@ -83,7 +83,7 @@ public class PmsCategoryController {
     @RequestMapping("/update")
     //@RequiresPermissions("product:pmscategory:update")
     public R update(@RequestBody PmsCategoryEntity pmsCategory){
-		pmsCategoryService.updateById(pmsCategory);
+		pmsCategoryService.updateCascade(pmsCategory);
 
         return R.ok();
     }

@@ -4,6 +4,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
 /**
  * @author srz
@@ -35,8 +36,13 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 //        @Target({ METHOD, FIELD, ANNOTATION_ TYPE, CONS TRUCTOR, PARAMETER, TYPE_ _USE })
 //        @Retention(RUNTIME)
 //        public @interface ListValue {
-//
+//        4、统一的异常处理
+//        @Control LerAdvice
+//        1)、编写异常处理类，使用@ControllerAdvice.
+//        2)、使用@ExceptionHandler标注方法可以处理的异常。
 
+
+@EnableFeignClients(basePackages = "com.srz.gulimall.product.feign")
 @MapperScan("com.srz.gulimall.product.dao")
 @SpringBootApplication
 @EnableDiscoveryClient

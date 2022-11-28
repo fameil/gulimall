@@ -1,10 +1,9 @@
 package com.srz.gulimall.product.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
-
 import java.io.Serializable;
-import java.util.Date;
+
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 /**
@@ -17,7 +16,9 @@ import lombok.Data;
 @Data
 @TableName("pms_attr")
 public class PmsAttrEntity implements Serializable {
-	private static final long serialVersionUID = 1L;
+
+	// 值类型
+	private Integer valueType;
 
 	/**
 	 * 属性id
@@ -56,5 +57,8 @@ public class PmsAttrEntity implements Serializable {
 	 * 快速展示【是否展示在介绍上；0-否 1-是】，在sku中仍然可以调整
 	 */
 	private Integer showDesc;
+
+	//分组ID
+	//private Long attrGroupId;
 
 }

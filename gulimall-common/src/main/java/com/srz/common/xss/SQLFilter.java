@@ -8,7 +8,8 @@
 
 package com.srz.common.xss;
 
-import com.common.exception.RRException;
+
+import com.srz.common.exception.RRException;
 import org.apache.commons.lang.StringUtils;
 
 /**

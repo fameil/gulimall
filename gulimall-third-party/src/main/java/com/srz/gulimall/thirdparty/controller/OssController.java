@@ -61,6 +61,7 @@ public class OssController {
         String upToken = auth.uploadToken(bucket);
         String dir = LocalDate.now().toString()+"/";
         System.out.println(dir);
+
         Map<String,String> respMap = new LinkedHashMap<>();
         respMap.put("policy", upToken);
         respMap.put("dir", dir);

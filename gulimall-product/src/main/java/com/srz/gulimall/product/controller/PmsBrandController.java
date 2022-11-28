@@ -95,7 +95,7 @@ public class PmsBrandController {
     @RequestMapping("/update")
     //@RequiresPermissions("product:pmsbrand:update")
     public R update(@Validated({UpdateGroup.class}) @RequestBody PmsBrandEntity pmsBrand){
-		pmsBrandService.updateById(pmsBrand);
+		pmsBrandService.updateDetail(pmsBrand);
 
         return R.ok();
     }
