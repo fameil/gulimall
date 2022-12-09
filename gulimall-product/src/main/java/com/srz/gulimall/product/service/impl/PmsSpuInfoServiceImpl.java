@@ -1,6 +1,9 @@
 package com.srz.gulimall.product.service.impl;
 
 
+import com.google.common.reflect.TypeToken;
+import com.google.gson.Gson;
+import com.srz.common.to.MemberPrice;
 import com.srz.common.to.SkuReductionTo;
 import com.srz.common.to.SpuBoundTo;
 import com.srz.common.utils.R;
@@ -12,6 +15,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -26,6 +30,7 @@ import com.srz.common.utils.Query;
 
 import com.srz.gulimall.product.dao.PmsSpuInfoDao;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 
 @Service("pmsSpuInfoService")
@@ -68,6 +73,7 @@ public class PmsSpuInfoServiceImpl extends ServiceImpl<PmsSpuInfoDao, PmsSpuInfo
         return new PageUtils(page);
     }
 
+    //TODO 高级部分再来完善
     @Transactional
     @Override
     public void saveSpuInfo(SpuSaveVo saveVo) {
@@ -149,6 +155,9 @@ public class PmsSpuInfoServiceImpl extends ServiceImpl<PmsSpuInfoDao, PmsSpuInfo
                     skuImagesEntity.setDefaultImg(img.getDefaultImg());
 
                     return skuImagesEntity;
+                }).filter(entity->{
+                    //返回True则收集
+                    return StringUtils.hasText(entity.getImgUrl());
                 }).collect(Collectors.toList());
 
                 //5.2、sku的图片信息pms_sku_images
@@ -173,19 +182,26 @@ public class PmsSpuInfoServiceImpl extends ServiceImpl<PmsSpuInfoDao, PmsSpuInfo
                 //属性无法对对拷
                 List<com.srz.common.to.MemberPrice> memberPriceList = new ArrayList<>(item.getMemberPrice().size());
 
-                item.getMemberPrice().forEach(memberPrice -> {
+                String gson = new Gson().toJson(item.getMemberPrice());
+                memberPriceList = new Gson().fromJson(gson, new TypeToken<List<MemberPrice>>() {
+                }.getType());
+
+/*                item.getMemberPrice().forEach(memberPrice -> {
                     com.srz.common.to.MemberPrice price = new com.srz.common.to.MemberPrice();
                     price.setId(memberPrice.getId());
                     price.setName(memberPrice.getName());
                     price.setPrice(memberPrice.getPrice());
                     memberPriceList.add(price);
-                });
+                });*/
+
+
                 skuReductionTo.setMemberPrice(memberPriceList);
 
-
-                R r2 = couponFeignService.saveSkuReduction(skuReductionTo);
-                if (r2.getCode() != 0){
-                    log.error("远程保存sku优惠信息失败");
+                if (skuReductionTo.getFullCount() >0 || skuReductionTo.getFullPrice().compareTo(new BigDecimal("0"))==1){
+                    R r2 = couponFeignService.saveSkuReduction(skuReductionTo);
+                    if (r2.getCode() != 0){
+                        log.error("远程保存sku优惠信息失败");
+                    }
                 }
 
             });
@@ -198,6 +214,40 @@ public class PmsSpuInfoServiceImpl extends ServiceImpl<PmsSpuInfoDao, PmsSpuInfo
         this.baseMapper.insert(infoEntity);
     }
 
+    @Override
+    public PageUtils queryPageCondition(Map<String, Object> params) {
+        QueryWrapper<PmsSpuInfoEntity> wrapper = new QueryWrapper<>();
+        String key = (String) params.get("key");
+        if (StringUtils.hasText(key)){
+            wrapper.and((w)->{
+                w.eq("id",key).or().like("spu_name",key);
+            });
+        }
+        String status = (String) params.get("status");
+        if (StringUtils.hasText(status)){
+            wrapper.eq("publish_status",status);
+
+        }
+        String brandId = (String) params.get("brandId");
+        if (StringUtils.hasText(brandId) && !"0".equalsIgnoreCase(brandId)){
+            wrapper.eq("brand_id",brandId);
+
+
+        }
+        String catelogId = (String) params.get("catelogId");
+        if (StringUtils.hasText(catelogId) && !"0".equalsIgnoreCase(catelogId)){
+            wrapper.eq("catalog_id",catelogId);
+        }
+
+
+        IPage<PmsSpuInfoEntity> page = this.page(
+                new Query<PmsSpuInfoEntity>().getPage(params),
+                wrapper
+
+        );
+
+        return new PageUtils(page);
+    }
 
 
 }

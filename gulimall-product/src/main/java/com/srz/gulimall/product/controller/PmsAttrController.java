@@ -1,9 +1,12 @@
 package com.srz.gulimall.product.controller;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 //import org.apache.shiro.authz.annotation.RequiresPermissions;
+import com.srz.gulimall.product.entity.PmsProductAttrValueEntity;
+import com.srz.gulimall.product.service.PmsProductAttrValueService;
 import com.srz.gulimall.product.vo.AttrRespVo;
 import com.srz.gulimall.product.vo.AttrVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +31,16 @@ import com.srz.common.utils.R;
 public class PmsAttrController {
     @Autowired
     private PmsAttrService pmsAttrService;
+
+    @Autowired
+    PmsProductAttrValueService productAttrValueService;
+
+    ///product/pmsattr/base/listforspu/{spuId}
+    @GetMapping("/base/listforspu/{spuId}")
+    public R baseAttrListforsup(@PathVariable("spuId") Long spuId){
+        List<PmsProductAttrValueEntity> entities = productAttrValueService.baseAttrlistforspu(spuId);
+        return R.ok().put("data",entities);
+    }
 
     ///product/pmsattr/sale/list/0
     ///product/pmsattr/base/list/225
@@ -85,6 +98,15 @@ public class PmsAttrController {
         return R.ok();
     }
 
+    ///product/attr/update/{spuId}
+    @PostMapping("/update/{spuId}")
+    public R updateSpuAttr(@PathVariable("spuId") Long spuId,
+                           @RequestBody List<PmsProductAttrValueEntity> entities){
+
+        productAttrValueService.updateSpuAttr(spuId,entities);
+
+        return R.ok();
+    }
     /**
      * 删除
      */

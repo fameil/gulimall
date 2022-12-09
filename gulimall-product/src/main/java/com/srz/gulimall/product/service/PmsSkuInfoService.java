@@ -22,5 +22,7 @@ public interface PmsSkuInfoService extends IService<PmsSkuInfoEntity> {
 
     void saveSkuInfo(PmsSkuInfoEntity pmsSkuInfoEntity);
 
+    PageUtils queryPageByCondition(Map<String, Object> params);
+
 }
 

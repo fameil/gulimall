@@ -3,17 +3,26 @@ server:
 
 spring:
   application:
-    name: gulimall-coupon
+    name: gulimall-ware
   datasource:
     username: root
     password: 847144514
     url: jdbc:mysql://114.115.246.166/gulimall_wms?serverTimezone=Asia/Shanghai&characterEncoding=UTF-8
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
-
+  cloud:
+    nacos:
+      discovery:
+        server-addr: www.srznet.top:8848
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
 
 mybatis-plus:
   mapper-locations: classpath*:/mapper/**/*.xml
   global-config:
     db-config:
       id-type: auto
+
+logging:
+  level:
+    com.srz.gulimall.ware: debug

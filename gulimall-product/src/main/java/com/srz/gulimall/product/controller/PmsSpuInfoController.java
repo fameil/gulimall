@@ -38,7 +38,7 @@ public class PmsSpuInfoController {
     @RequestMapping("/list")
     //@RequiresPermissions("product:pmsspuinfo:list")
     public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = pmsSpuInfoService.queryPage(params);
+        PageUtils page = pmsSpuInfoService.queryPageCondition(params);
 
         return R.ok().put("page", page);
     }
