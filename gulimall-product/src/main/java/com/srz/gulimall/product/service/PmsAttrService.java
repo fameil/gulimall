@@ -34,5 +34,13 @@ public interface PmsAttrService extends IService<PmsAttrEntity> {
     void deleteRelation(AttrGroupReleationVo[] vos);
 
     PageUtils getNoRelationAttr(Map<String, Object> params, Long attrgroupId);
+
+    /**
+     * 在指定的所有属性集合里面，挑出检索属性
+     * @param attrIds
+     * @return
+     */
+    List<Long> selectSearchAttrIds(List<Long> attrIds);
+
 }
 

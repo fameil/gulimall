@@ -32,5 +32,7 @@ public interface PmsCategoryService extends IService<PmsCategoryEntity> {
 
     void updateCascade(PmsCategoryEntity pmsCategory);
 
+    List<PmsCategoryEntity> getLevel1Categorys();
+
 }
 

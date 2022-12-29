@@ -6,6 +6,7 @@ import com.srz.gulimall.product.entity.PmsSkuInfoEntity;
 import com.srz.gulimall.product.entity.PmsSpuInfoEntity;
 import com.srz.gulimall.product.vo.SpuSaveVo;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -23,6 +24,8 @@ public interface PmsSkuInfoService extends IService<PmsSkuInfoEntity> {
     void saveSkuInfo(PmsSkuInfoEntity pmsSkuInfoEntity);
 
     PageUtils queryPageByCondition(Map<String, Object> params);
+
+    List<PmsSkuInfoEntity> getSpusBySpuID(Long spuId);
 
 }
 

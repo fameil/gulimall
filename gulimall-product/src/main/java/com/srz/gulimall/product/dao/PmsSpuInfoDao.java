@@ -3,6 +3,7 @@ package com.srz.gulimall.product.dao;
 import com.srz.gulimall.product.entity.PmsSpuInfoEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * spu信息
@@ -13,5 +14,7 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface PmsSpuInfoDao extends BaseMapper<PmsSpuInfoEntity> {
-	
+
+    void updateSpuStatus(@Param("spuId") Long spuId, @Param("code") int code);
+
 }

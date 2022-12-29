@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -84,6 +85,16 @@ public class PmsSkuInfoServiceImpl extends ServiceImpl<PmsSkuInfoDao, PmsSkuInfo
         );
 
         return new PageUtils(page);
+    }
+
+    @Override
+    public List<PmsSkuInfoEntity> getSpusBySpuID(Long spuId) {
+        List<PmsSkuInfoEntity> list = this.list(
+                new QueryWrapper<PmsSkuInfoEntity>().eq("spu_id",spuId)
+        );
+
+
+        return list;
     }
 
 

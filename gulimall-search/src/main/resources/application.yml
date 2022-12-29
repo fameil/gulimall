@@ -1,0 +1,9 @@
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: www.srznet.top:8848
+  application:
+    name: gulimall-search
+server:
+  port: 12000
