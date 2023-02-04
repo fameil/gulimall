@@ -17,6 +17,38 @@
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
+        <!-- 使用redisson作为所有分布式锁，分布式等功能框架 -->
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson</artifactId>
+            <version>3.18.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>
+
+        <!-- 引入redis -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>io.lettuce</groupId>
+                    <artifactId>lettuce-core</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+<!-- nable to connect to Redis; nested exception is io.lettuce.core.RedisConnecti-->
+<!--        尝试使用jedis修复内存溢出（未遇到-->
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+        </dependency>
+
+
+
         <!-- thymeleaf -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -85,9 +117,6 @@
 
     </dependencies>
 
-    <properties>
-        <maven.compiler.source>9</maven.compiler.source>
-        <maven.compiler.target>9</maven.compiler.target>
-    </properties>
+
 
 </project>

@@ -30,12 +30,25 @@ public class zhiaishaiwen {
             System.out.println();
             time = time + 86400000;
         }
-
-
-
-
-
     }
+    @Test
+    public void data() throws IOException, ParseException {
+
+        Date date = new Date();
+        long time = date.getTime();
+        long day = 86400000l;
+        day = day * 365;
+        time = time + day;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+
+        for (int i = 0; i < 366; i++){
+            String format = sdf.format(time);
+            System.out .println(format);
+            System.out.println(" ");
+            time = time - 86400000;
+        }
+    }
+
 
 
 }

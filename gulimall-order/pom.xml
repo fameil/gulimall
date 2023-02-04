@@ -7,9 +7,10 @@
         <groupId>com.srz.gulimall</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
+
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>guilmall-order</artifactId>
+    <artifactId>gulimall-order</artifactId>
     <dependencies>
         <dependency>
             <groupId>com.srz.gulimall</groupId>
@@ -20,8 +21,8 @@
     </dependencies>
 
     <properties>
-        <maven.compiler.source>9</maven.compiler.source>
-        <maven.compiler.target>9</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
 </project>

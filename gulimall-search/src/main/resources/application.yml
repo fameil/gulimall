@@ -5,5 +5,7 @@ spring:
         server-addr: www.srznet.top:8848
   application:
     name: gulimall-search
+  thymeleaf:
+    cache: false
 server:
   port: 12000

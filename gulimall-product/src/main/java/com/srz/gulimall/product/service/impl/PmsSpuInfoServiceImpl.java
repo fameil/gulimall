@@ -293,7 +293,7 @@ public class PmsSpuInfoServiceImpl extends ServiceImpl<PmsSpuInfoDao, PmsSpuInfo
         try{
             R skusHasStock = wareFeignService.getSkusHasStock(skuIdList);
             //
-            TypeReference<List<SkuHasStockVo>> typeReference = new TypeReference<>() {
+            TypeReference<List<SkuHasStockVo>> typeReference = new TypeReference<List<SkuHasStockVo>>() {
             };
             stockMap = skusHasStock.getData(typeReference).stream().collect(Collectors.toMap(SkuHasStockVo::getSkuId, item -> item.getHasStock()));
         } catch (Exception e){

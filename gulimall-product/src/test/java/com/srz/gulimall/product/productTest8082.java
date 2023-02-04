@@ -17,14 +17,18 @@ import com.srz.gulimall.product.utils.Qiniu;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @author srz
@@ -43,12 +47,42 @@ public class productTest8082 {
     @Autowired
     PmsCategoryService categoryService;
 
+    @Autowired
+    StringRedisTemplate stringRedisTemplate;
+
+    @Autowired
+    RedissonClient redissonClient;
+
+    @Test
+    public void redisson(){
+        System.out.println(redissonClient);
+
+    }
+
+    @Test
+    public void redisTest(){
+        ValueOperations<String, String> ops = stringRedisTemplate.opsForValue();
+
+        //保存
+        ops.set("hello","world_"+ UUID.randomUUID().toString());
+
+        //查询
+        String hello = ops.get("catalogJSON");
+
+        stringRedisTemplate.delete("catalogJSON");
+
+        System.out.println("数据："+hello);
+
+
+
+    }
+
+
+
     @Test
     public void testFindPath(){
         Long[] catelogPath = categoryService.findCatelogPath(225l);
         log.info("完整路径:{}", Arrays.asList(catelogPath));
-
-
     }
 
     @Test
