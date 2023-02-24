@@ -1,6 +1,7 @@
 package com.srz.gulimall.product.app;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 //import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -9,11 +10,7 @@ import com.srz.common.valid.UpdataeStatusGroup;
 import com.srz.common.valid.UpdateGroup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.srz.gulimall.product.entity.PmsBrandEntity;
 import com.srz.gulimall.product.service.PmsBrandService;
@@ -53,6 +50,13 @@ public class PmsBrandController {
     //@RequiresPermissions("product:pmsbrand:info")
     public R info(@PathVariable("brandId") Long brandId){
 		PmsBrandEntity pmsBrand = pmsBrandService.getById(brandId);
+
+        return R.ok().put("pmsBrand", pmsBrand);
+    }
+
+    @GetMapping("/infos")
+    public R info(@RequestParam("brandIds") List<Long> brandId){
+        List<PmsBrandEntity> pmsBrand = pmsBrandService.getBrandsByIds(brandId);
 
         return R.ok().put("pmsBrand", pmsBrand);
     }

@@ -10,6 +10,7 @@ import java.util.List;
  *  封装页面所有可能传递过来的查询条件
  *
  *  catalog3Id=225&keyword=小米&sort=saleCount_asc&hasStock=0/1
+ *  &attrs=1_5寸:8寸&attrs=2_16G:8G
  */
 @Data
 public class SearchParam {
@@ -28,15 +29,17 @@ public class SearchParam {
     好多的过滤条件
         hasStock(是否有货)、skuPrice区间、brandId、 catalog3Id、 attrs
         hasStock=0/1
-        skuPrice=1_500/-500/500_
+        skuPrice=1_500/_500/500_
         brandId=1
         attrs=2_5寸6寸
     */
-    private Integer hasStock;//是否只显示有货
+    private Integer hasStock;//是否只显示有货0(无库存)/1(有库存)
     private String skuPrice;//价格区间查询
     private List<Long> brandId;//按照品牌进行查询，可以多选
     private List<String> attrs;
-    private Integer pageNum;//页码
+    private Integer pageNum = 1;//页码
+
+    private String _queryString;//原生的所有查询条件
 
 
 

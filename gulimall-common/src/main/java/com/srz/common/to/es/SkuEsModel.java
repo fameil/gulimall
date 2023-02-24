@@ -25,7 +25,7 @@ public class SkuEsModel {
     private String brandName;
     private String brandImg;
     private String catalogName;
-    private List<Attrs> attr;
+    private List<Attrs> attrs;
 
     @Data
     public static class Attrs{

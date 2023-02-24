@@ -4,6 +4,8 @@ import com.srz.gulimall.product.service.PmsCategoryBrandRelationService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 import java.util.Map;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -51,6 +53,12 @@ public class PmsBrandServiceImpl extends ServiceImpl<PmsBrandDao, PmsBrandEntity
             //TODO 更新其他关联
         }
 
+    }
+
+    @Override
+    public List<PmsBrandEntity> getBrandsByIds(List<Long> brandId) {
+
+        return baseMapper.selectList(new QueryWrapper<PmsBrandEntity>().in("brand_id",brandId));
     }
 
 }

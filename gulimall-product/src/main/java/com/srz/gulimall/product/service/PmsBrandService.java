@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.srz.common.utils.PageUtils;
 import com.srz.gulimall.product.entity.PmsBrandEntity;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -18,5 +19,7 @@ public interface PmsBrandService extends IService<PmsBrandEntity> {
     PageUtils queryPage(Map<String, Object> params);
 
     void updateDetail(PmsBrandEntity pmsBrand);
+
+    List<PmsBrandEntity> getBrandsByIds(List<Long> brandId);
 }
 

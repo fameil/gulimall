@@ -329,7 +329,7 @@ public class PmsSpuInfoServiceImpl extends ServiceImpl<PmsSpuInfoDao, PmsSpuInfo
             esModel.setCatalogName(category.getName());
 
             //设置检索属性
-            esModel.setAttr(attrsList);
+            esModel.setAttrs(attrsList);
 
 
             return esModel;
