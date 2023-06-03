@@ -22,7 +22,6 @@ public class MemberEntity implements Serializable {
 	/**
 	 * id
 	 */
-	@TableId
 	private Long id;
 	/**
 	 * 会员等级id
@@ -92,5 +91,12 @@ public class MemberEntity implements Serializable {
 	 * 注册时间
 	 */
 	private Date createTime;
+
+	//社交帐号唯一id
+	private String socialUid;
+	//访问令牌
+	private String accessToken;
+	//访问令牌过期时间
+	private Long expiresIn;
 
 }

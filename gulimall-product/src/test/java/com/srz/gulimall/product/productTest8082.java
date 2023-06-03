@@ -10,10 +10,13 @@ import com.qiniu.storage.Region;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.storage.model.DefaultPutRet;
 import com.qiniu.util.Auth;
+import com.srz.gulimall.product.dao.PmsAttrGroupDao;
+import com.srz.gulimall.product.dao.PmsSkuSaleAttrValueDao;
 import com.srz.gulimall.product.entity.PmsBrandEntity;
 import com.srz.gulimall.product.service.PmsBrandService;
 import com.srz.gulimall.product.service.PmsCategoryService;
 import com.srz.gulimall.product.utils.Qiniu;
+import com.srz.gulimall.product.vo.SkuItemVo;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -52,6 +55,21 @@ public class productTest8082 {
 
     @Autowired
     RedissonClient redissonClient;
+
+    @Autowired
+    PmsAttrGroupDao attrGroupDao;
+
+    @Autowired
+    PmsSkuSaleAttrValueDao skuSaleAttrValueDao;
+
+    @Test
+    public void test1(){
+//        List<SkuItemVo.SputItemAttrGroupVo> attrGroupWithAttrsBySpuId = attrGroupDao.getAttrGroupWithAttrsBySpuId(100L, 225L);
+//        System.out.println(attrGroupWithAttrsBySpuId);
+        List<SkuItemVo.SkuItemSaleAttrsVo> saleAttrsBySpuId = skuSaleAttrValueDao.getSaleAttrsBySpuId(32L);
+        System.out.println(saleAttrsBySpuId);
+
+    }
 
     @Test
     public void redisson(){

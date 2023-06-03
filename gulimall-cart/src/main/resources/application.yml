@@ -1,0 +1,13 @@
+server:
+  port: 30000
+
+spring:
+  application:
+    name: gulimall-cart
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 106.53.66.76:8848
+  redis:
+    host: www.srznet.top
+    password: 847144514

@@ -2,10 +2,15 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: www.srznet.top:8848
+        server-addr: 106.53.66.76:8848
   application:
     name: gulimall-search
   thymeleaf:
     cache: false
-server:
+  redis:
+    host: www.srznet.top
+    port: 6379
+    password: 847144514
+  session:
+    store-type: redis
   port: 12000

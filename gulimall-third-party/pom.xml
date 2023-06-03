@@ -23,6 +23,15 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
+
+        <!-- spring源数据提示-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+
         <!-- 七牛云文件存储 -->
         <dependency>
             <groupId>com.qiniu</groupId>

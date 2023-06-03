@@ -1,0 +1,9 @@
+server:
+  port: 8080
+
+spring:
+  redis:
+    #host: srzcentos.tpddns.cn
+    port: 6379
+    password: 847144514
+    host: www.srznet.top

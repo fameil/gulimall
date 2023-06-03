@@ -3,13 +3,22 @@ server:
 
 spring:
   application:
-    name: gulimall-member
+    name: gulimall-order
   datasource:
     username: root
     password: 847144514
     url: jdbc:mysql://114.115.246.166/gulimall_oms?serverTimezone=Asia/Shanghai&characterEncoding=UTF-8
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 106.53.66.76:8848
+  thymeleaf:
+    cache: false
+  redis:
+    host: www.srznet.top
+    password: 847144514
 
 
 mybatis-plus:

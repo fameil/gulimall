@@ -60,10 +60,10 @@ public class PmsSkuInfoEntity implements Serializable {
 	/**
 	 * 价格
 	 */
+
 	private BigDecimal price;
 	/**
 	 * 销量
 	 */
 	private Long saleCount;
-
 }

@@ -16,6 +16,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import java.util.Random;
+
+import static org.checkerframework.checker.units.UnitsTools.s;
+
 /**
  * @author srz
  * @create 2022/8/29 22:40
@@ -23,6 +27,13 @@ import java.util.Date;
 
 @SpringBootTest
 public class textCodeC {
+
+    @Test
+    public void test2()  {
+        Random random = new Random();
+        int randomNumber = random.nextInt(89999) + 10000;
+        System.out.println(randomNumber);
+    }
 
     @Test
     public void test1()  {

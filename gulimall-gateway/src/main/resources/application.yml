@@ -1,14 +1,20 @@
 server:
   port: 88
-
+  ssl:
+    enabled: false
 spring:
   application:
     name: gulimall-gateway
   cloud:
     nacos:
       discovery:
-        server-addr: 114.115.246.166:8848
+        server-addr: 106.53.66.76:8848
     gateway:
+      httpclient:
+        pool:
+          #(异常处理)设置连接空闲多久后会被回收掉，这个时间要比对应服务的回收时间小（
+          #max-idle-time: 60000ms
+          max-idle-time: 60000ms
       routes:
         - id: test_route
           uri: https://www.baidu.com
@@ -63,10 +69,25 @@ spring:
         - id: gulimall_host_route
           uri: lb://gulimall-product
           predicates:
-            - Host=gulimall.com
+            - Host=gulimall.com,item.gulimall.com
 
         - id: gulimall_search_route
           uri: lb://gulimall-search
           predicates:
             - Host=search.gulimall.com
+
+        - id: gulimall_auth_route
+          uri: lb://gulimall-auth-server
+          predicates:
+            - Host=auth.gulimall.com
+
+        - id: gulimall_cart_route
+          uri: lb://gulimall-cart
+          predicates:
+            - Host=cart.gulimall.com
+
+        - id: gulimall_order_route
+          uri: lb://gulimall-order
+          predicates:
+            - Host=order.gulimall.com
 
